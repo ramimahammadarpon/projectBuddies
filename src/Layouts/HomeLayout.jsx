@@ -1,14 +1,14 @@
 import React from 'react';
-import Navbar from '../Components/Navbar';
 import { Outlet } from 'react-router';
+import Navbar from '../Components/Navbar';
 
 const HomeLayout = () => {
     return (
         <div>
-            <header>
+            <header className='sticky top-0'>
                 <Navbar></Navbar>
             </header>
-            <main className='px-5 md:px-16 lg:px-24'>
+            <main className=''>
                 <Outlet></Outlet>
             </main>
             <footer></footer>
