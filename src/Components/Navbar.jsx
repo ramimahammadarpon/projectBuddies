@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import userPhoto from "../assets/userPhoto.jpeg";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../Auth/AuthContext";
 
 const Navbar = () => {
 
   const [clicked, setClicked] = useState(false);
   const [theme, setTheme] = useState(true);
+  const user = useContext(AuthContext);
+  console.log(user);
 
   const handleTheme = ()=> {
     const newTheme = !theme;
