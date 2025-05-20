@@ -4,19 +4,25 @@ import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 
 const Navbar = () => {
-
-  const [clicked, setClicked] = useState(false);
   const [theme, setTheme] = useState(true);
-  const user = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   console.log(user);
 
-  const handleTheme = ()=> {
+  const handleTheme = () => {
     const newTheme = !theme;
     setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme? "light":"dark")
-    
-  }
- 
+    document.documentElement.setAttribute(
+      "data-theme",
+      newTheme ? "light" : "dark"
+    );
+  };
+
+  const handleLogout = () => {
+    logout().then(() => {
+      console.log("logout sucessfull");
+    });
+  };
+
   const links = (
     <>
       <li>
@@ -54,31 +60,77 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 text-lg gap-3">{links}</ul>
       </div>
       <div className="flex items-center">
-        <div className="relative">
-          <img
-            src={userPhoto}
-            onClick={()=> setClicked(!clicked)}
-            className="w-8 md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
-            alt=""
-          />
-          <ul className={`absolute -top-40 ${clicked&& "top-14 lg:top-16"} text-accent bg-base-100 w-30 right-0 p-2 rounded-lg transition-all duration-100 ease-in-out -z-10 flex flex-col`}>
-            <NavLink to="/login" className="text-right p-1 lg:hidden  rounded-sm text-xs">Log In</NavLink>
-            <NavLink to="/signup" className="text-right p-1 lg:hidden rounded-sm text-xs">Sign Up</NavLink>
-            <button onClick={handleTheme} className="text-right p-1 rounded-sm text-xs hover:cursor-pointer">Theme: {theme? "Dark": "Light"}</button>
+        <div className="relative group">
+          {user ? (
+            <img
+              src={user.photoURL}
+              className="w-8 md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
+              alt=""
+            />
+          ) : (
+            <img
+              src={userPhoto}
+              className="w-8 md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
+              alt=""
+            />
+          )}
+          <ul
+            className={"absolute top-16 group-hover:opacity-100 invisible group-hover:visible text-accent bg-base-100 w-40 right-0 p-2 rounded-lg transition-all duration-150 ease-in-out flex flex-col"}
+          >
+            {user ? (
+              <>
+                <p className="text-right text-primary p-1 rounded-sm text-xs">
+                  {user.displayName}
+                </p>
+                <button
+                  onClick={handleLogout}
+                  className="text-right lg: p-1 rounded-sm text-xs cursor-pointer"
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to="/login"
+                  className="text-right p-1 lg:hidden  rounded-sm text-xs"
+                >
+                  Log In
+                </NavLink>
+                <NavLink
+                  to="/signup"
+                  className="text-right p-1 lg:hidden rounded-sm text-xs"
+                >
+                  Sign Up
+                </NavLink>
+              </>
+            )}
+            <button
+              onClick={handleTheme}
+              className="text-right p-1 rounded-sm text-xs hover:cursor-pointer"
+            >
+              Theme: {theme ? "Dark" : "Light"}
+            </button>
           </ul>
         </div>
-        <Link
-          className="hidden text-lg py-1.5 w-28 lg:flex justify-center rounded-sm font-medium lg:mr-3 lg:border lg:border-primary lg:text-primary bg-transparent bg-none hover:text-accent hover:bg-gradient-to-r from-primary to-secondary transition-all duration-300 ease-in overflow-hidden"
-          to="/login"
-        >
-          Log In
-        </Link>
-        <Link
-          className="hidden text-lg py-1.5 w-32 lg:flex justify-center rounded-sm font-medium lg:mr-3 lg:border lg:border-primary text-accent bg-gradient-to-r from-primary to-secondary hover:text-primary hover:bg-none transition-all duration-300 ease-in overflow-hidden"
-          to="/signup"
-        >
-          Sign Up
-        </Link>
+        {user ? (
+          ""
+        ) : (
+          <>
+            <Link
+              className="hidden text-lg py-1.5 w-28 lg:flex justify-center rounded-sm font-medium lg:mr-3 lg:border lg:border-primary lg:text-primary bg-transparent bg-none hover:text-accent hover:bg-gradient-to-r from-primary to-secondary transition-all duration-300 ease-in overflow-hidden"
+              to="/login"
+            >
+              Log In
+            </Link>
+            <Link
+              className="hidden text-lg py-1.5 w-32 lg:flex justify-center rounded-sm font-medium lg:border lg:border-primary text-accent bg-gradient-to-r from-primary to-secondary hover:text-primary hover:bg-none transition-all duration-300 ease-in overflow-hidden"
+              to="/signup"
+            >
+              Sign Up
+            </Link>
+          </>
+        )}
       </div>
       <div className="dropdown lg:hidden">
         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

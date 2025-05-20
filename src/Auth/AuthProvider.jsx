@@ -1,17 +1,53 @@
-import React from 'react';
-import { AuthContext } from './AuthContext';
+import React, { useEffect, useState } from "react";
+import { AuthContext } from "./AuthContext";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../firebase.init";
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState({});
 
-    const value ={
-        name: "Ramim",
-        id: 39
-    }
-    return (
-        <AuthContext value={value}>
-            {children}
-        </AuthContext>
-    );
+  const logout = () => {
+    return signOut(auth);
+  };
+
+  const signUpWithEmail = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const update = (userInfo) => {
+    return updateProfile(auth.currentUser, userInfo);
+  };
+
+  const googleSignup = () => {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider);
+  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const value = {
+    signUpWithEmail,
+    googleSignup,
+    update,
+    logout,
+    user,
+    setUser,
+  };
+
+  return <AuthContext value={value}>{children}</AuthContext>;
 };
 
 export default AuthProvider;

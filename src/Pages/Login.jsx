@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../Auth/AuthContext";
 
 const Login = () => {
+
+  const {googleSignup} = useContext(AuthContext);
+  console.log(googleSignup);
+
+  const handleGoogleSignup = () => {
+    googleSignup().then(result=> {
+      console.log(result);
+    }).catch(error => console.log(error));
+  }
+
+  const handleLogin = e => {
+    e.preventDefault();
+  }
+
   return (
     <div className="hero bg-base-200 min-h-[90vh]">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl shadow-primary">
         <div className="card-body">
           <h1 className="text-3xl text-primary font-bold">Login now!</h1>
-          <form className="fieldset">
+          <form onSubmit={handleLogin} className="fieldset">
             <label className="label">Email</label>
             <input
               type="email"
@@ -32,7 +47,7 @@ const Login = () => {
               Login
             </button>
             <p className="text-center text-lg">or</p>
-            <button className="btn text-accent bg-gradient-to-r from-primary to-secondary border-primary hover:text-primary hover:bg-transparent hover:bg-none transition-all duration-300 ease-in-out">
+            <button type="button" onClick={handleGoogleSignup} className="btn text-accent bg-gradient-to-r from-primary to-secondary border-primary hover:text-primary hover:bg-transparent hover:bg-none transition-all duration-300 ease-in-out">
               <FcGoogle size={20} />Sign Up With Google
             </button>
             <p className="text-accent">
