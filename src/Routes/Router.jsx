@@ -33,16 +33,20 @@ export const router = createBrowserRouter([
             {
                 path: 'browseTasks',
                 element:<PrivateRoute><BrowseTasks></BrowseTasks></PrivateRoute>,
-                loader: ()=>fetch('http://localhost:3000/tasks')
+                loader: ()=>fetch('http://localhost:3000/tasks'),
+                hydrateFallbackElement: <div className='min-h-[70vh] flex justify-center items-center'><span className="loading loading-spinner w-12"></span></div>
             },
             {
                 path:'taskDetails/:id',
                 element: <PrivateRoute><TaskDetails></TaskDetails></PrivateRoute>,
-                loader: ({params})=>fetch(`http://localhost:3000/tasks/${params.id}`)
+                loader: ({params})=>fetch(`http://localhost:3000/tasks/${params.id}`),
+                hydrateFallbackElement: <div className='min-h-[70vh] flex justify-center items-center'><span className="loading loading-spinner w-12"></span></div>
             },
             {
                 path:'/myPostedTasks',
-                element: <PrivateRoute><MyPostedTask></MyPostedTask></PrivateRoute>
+                element: <PrivateRoute><MyPostedTask></MyPostedTask></PrivateRoute>,
+                loader: ()=>fetch('http://localhost:3000/tasks'),
+                hydrateFallbackElement: <div className='min-h-[70vh] flex justify-center items-center'><span className="loading loading-spinner w-12"></span></div>
             }
         ]
     }

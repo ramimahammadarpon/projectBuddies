@@ -1,12 +1,38 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from "react";
+import { useLoaderData } from "react-router";
+import { AuthContext } from "../Auth/AuthContext";
+import Table from "../Components/Table";
 
 const MyPostedTask = () => {
+  const tasks = useLoaderData();
+  const { user } = useContext(AuthContext);
+  const [myTasks, setMyTasks] = useState([]);
+  useEffect(() => {
+    const newTask = tasks.filter((task) => task.email === user.email);
+    setMyTasks(newTask);
+  }, [tasks, user.email]);
+  console.log(myTasks);
 
-    return (
-        <div className='mt-3 md:mt-6 lg:mt-10'>
-            This is my posted task
-        </div>
-    );
+  return (
+    <div className="overflow-x-auto mx-3 md:mx-16 lg:mx-24 mt-3 md:mt-6 lg:mt-10">
+      <table className="table">
+        {/* head */}
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Task Title</th>
+            <th>Deadline</th>
+            <th>Budget</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* row 1 */}
+          {myTasks.map((tasks, index) => <Table tasks={tasks} index={index}></Table>)}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default MyPostedTask;
