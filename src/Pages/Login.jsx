@@ -5,7 +5,7 @@ import { AuthContext } from "../Auth/AuthContext";
 
 const Login = () => {
 
-  const {googleSignup} = useContext(AuthContext);
+  const {googleSignup, login} = useContext(AuthContext);
   console.log(googleSignup);
 
   const handleGoogleSignup = () => {
@@ -16,6 +16,15 @@ const Login = () => {
 
   const handleLogin = e => {
     e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    login(email, password).then(result=>{
+      console.log(result)
+    }).catch(error=> console.log(error));
+
   }
 
   return (

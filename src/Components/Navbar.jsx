@@ -5,8 +5,8 @@ import { AuthContext } from "../Auth/AuthContext";
 
 const Navbar = () => {
   const [theme, setTheme] = useState(true);
+  const [clicked, setClicked] = useState(false);
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
 
   const handleTheme = () => {
     const newTheme = !theme;
@@ -64,18 +64,20 @@ const Navbar = () => {
           {user ? (
             <img
               src={user.photoURL}
+              onClick={()=>setClicked(!clicked)}
               className="w-8 md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
               alt=""
             />
           ) : (
             <img
               src={userPhoto}
+              onClick={()=>setClicked(!clicked)}
               className="w-8 md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
               alt=""
             />
           )}
           <ul
-            className={"absolute top-16 group-hover:opacity-100 invisible group-hover:visible text-accent bg-base-100 w-40 right-0 p-2 rounded-lg transition-all duration-150 ease-in-out flex flex-col"}
+            className={`absolute top-14 lg:top-16 text-accent bg-base-100 w-40 lg:group-hover:opacity-100 lg:invisible lg:group-hover:visible right-0 p-2 rounded-lg transition-all duration-150 ease-in-out flex flex-col ${clicked? "visible opacity-100 lg:invisible" : "group-hover:opacity-100 invisible group-hover:visible" }`}
           >
             {user ? (
               <>

@@ -4,22 +4,34 @@ import { Link } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 
 const Signup = () => {
+  const { signUpWithEmail, update, setUser, googleSignup } = useContext(AuthContext);
 
-  const {signUpWithEmail, update,setUser,user} = useContext(AuthContext);
-
-  const handleSignUp = e =>{
+  const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const {email, password, photoURL, name} = Object.fromEntries(formData.entries());
+    const { email, password, photoURL, name } = Object.fromEntries(
+      formData.entries()
+    );
     console.log(email, password);
-    signUpWithEmail(email, password).then(result=>{
-      console.log(result.user);
-      update({displayName:name, photoURL: photoURL}).then(result=>{
-        console.log(result?.user);
-        setUser({... result?.user, displayName:name, photoURL:photoURL})
-      }).catch(error=>console.log(error));
-    }).catch(error=>console.log(error));
+    signUpWithEmail(email, password)
+      .then((result) => {
+        console.log(result.user);
+        update({ displayName: name, photoURL: photoURL })
+          .then((result) => {
+            console.log(result?.user);
+            setUser({ ...result?.user, displayName: name, photoURL: photoURL });
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
+  };
+
+
+  const handleGoogleSignup = () => {
+    googleSignup().then(result=> {
+      console.log(result);
+    }).catch(error => console.log(error));
   }
 
   return (
@@ -50,12 +62,45 @@ const Signup = () => {
               placeholder="Enter The Phot URL"
             />
             <label className="label">Password</label>
-            <input
-              type="password"
-              className="input w-full"
-              name="password"
-              placeholder="Password"
-            />
+            <label className="input validator w-full">
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+                  <circle
+                    cx="16.5"
+                    cy="7.5"
+                    r=".5"
+                    fill="currentColor"
+                  ></circle>
+                </g>
+              </svg>
+              <input
+                className="w-full"
+                type="password"
+                required
+                placeholder="Password"
+                minLength="6"
+                name="password"
+                pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+              />
+            </label>
+            <p className="validator-hint hidden">
+              Must be at least 6 characters, including
+              <br />
+              At least one lowercase letter <br />
+              At least one uppercase letter
+            </p>
             <div>
               <a className="link link-hover hover:text-primary">
                 Forgot password?
@@ -65,13 +110,14 @@ const Signup = () => {
               Sign Up
             </button>
             <p className="text-center text-lg">or</p>
-             <button className="btn text-accent bg-gradient-to-r from-primary to-secondary border-primary hover:text-primary hover:bg-transparent hover:bg-none transition-all duration-300 ease-in-out">
-              <FcGoogle size={20} />Sign Up With Google
+            <button onClick={handleGoogleSignup}type="button" className="btn text-accent bg-gradient-to-r from-primary to-secondary border-primary hover:text-primary hover:bg-transparent hover:bg-none transition-all duration-300 ease-in-out">
+              <FcGoogle size={20} />
+              Sign Up With Google
             </button>
             <p className="text-accent">
               Already have any Account?{" "}
               <Link to="/login" className="link text-secondary">
-               Login Here
+                Login Here
               </Link>
             </p>
           </form>
