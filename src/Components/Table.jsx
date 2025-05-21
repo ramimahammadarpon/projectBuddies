@@ -5,21 +5,32 @@ import writing from "../assets/writing.jpg";
 import marketing from "../assets/marketing.jpg";
 import graphicDesign from "../assets/graphicDesign.jpeg";
 
-const Table = ({tasks, index}) => {
+const Table = ({myTasks, setMyTasks, myTask, index}) => {
     const [cardImg, setCardImg] = useState("");
     useEffect(() => {
-        if (tasks.category === "Web Development") {
+        if (myTask.category === "Web Development") {
           setCardImg(webDevelopment);
-        } else if (tasks.category === "Web Design") {
+        } else if (myTask.category === "Web Design") {
           setCardImg(webDesign);
-        } else if (tasks.category === "Writing") {
+        } else if (myTask.category === "Writing") {
           setCardImg(writing);
-        } else if (tasks.category === "Marketing") {
+        } else if (myTask.category === "Marketing") {
           setCardImg(marketing);
-        } else if (tasks.category === "Graphics Design") {
+        } else if (myTask.category === "Graphics Design") {
           setCardImg(graphicDesign);
         }
-      }, [tasks.category]);
+      }, [myTask.category]);
+
+      const handleDeleteTask = () => {
+        fetch(`http://localhost:3000/tasks/${myTask._id}`,{
+            method: 'DELETE', 
+        }).then(res=>res.json()).then(data=>{
+            console.log("Deleted Successfully",data);
+            const newTasksList = myTasks.filter(t=> t._id !== myTask._id);
+            setMyTasks(newTasksList);
+        })
+      }
+
     return (
         <tr key={index}>
               <th>{index + 1}</th>
@@ -34,16 +45,16 @@ const Table = ({tasks, index}) => {
                     </div>
                   </div>
                   <div>
-                    <div className="font-bold">{tasks.taskTitle}</div>
-                    <div className="text-sm opacity-50">{tasks.category}</div>
+                    <div className="font-bold">{myTask.taskTitle}</div>
+                    <div className="text-sm opacity-50">{myTask.category}</div>
                   </div>
                 </div>
               </td>
-              <td>{tasks.deadline}</td>
-              <td>{tasks.budget} Taka</td>
+              <td>{myTask.deadline}</td>
+              <td>{myTask.budget} Taka</td>
               <th>
                 <button className="btn btn-ghost btn-xs">Update</button>
-                <button className="btn btn-ghost btn-xs">Delete</button>
+                <button onClick={handleDeleteTask} className="btn btn-ghost btn-xs">Delete</button>
                 <button className="btn btn-ghost btn-xs">Bids</button>
               </th>
             </tr>
