@@ -77,7 +77,7 @@ const Navbar = () => {
             />
           )}
           <ul
-            className={`absolute top-14 lg:top-16 text-accent bg-base-100 w-40 lg:group-hover:opacity-100 lg:invisible lg:group-hover:visible right-0 p-2 rounded-lg transition-all duration-150 ease-in-out flex flex-col ${clicked? "visible opacity-100 lg:invisible" : "group-hover:opacity-100 invisible group-hover:visible" }`}
+            className={`absolute top-14 lg:top-16 text-accent bg-base-200 w-40 lg:group-hover:opacity-100 lg:invisible lg:group-hover:visible right-0 p-2 rounded-lg transition-all duration-150 ease-in-out flex flex-col ${clicked? "visible opacity-100 lg:invisible" : "group-hover:opacity-100 invisible group-hover:visible" }`}
           >
             {user ? (
               <>
