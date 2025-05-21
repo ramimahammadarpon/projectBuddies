@@ -65,14 +65,14 @@ const Navbar = () => {
             <img
               src={user.photoURL}
               onClick={()=>setClicked(!clicked)}
-              className="w-8 md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
+              className="w-8 object-cover md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
               alt=""
             />
           ) : (
             <img
               src={userPhoto}
               onClick={()=>setClicked(!clicked)}
-              className="w-8 md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
+              className="w-8 md:w-10 object-cover aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
               alt=""
             />
           )}
@@ -154,7 +154,7 @@ const Navbar = () => {
         </div>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 right-0 w-36 p-2 shadow"
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box 1 mt-3 right-0 w-36 p-2 shadow"
         >
           {links}
         </ul>

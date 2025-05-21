@@ -13,6 +13,7 @@ import { auth } from "../firebase.init";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true)
 
   const logout = () => {
     return signOut(auth);
@@ -38,6 +39,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.log(user);
       setUser(user);
+      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -51,6 +53,7 @@ const AuthProvider = ({ children }) => {
     logout,
     user,
     setUser,
+    loading
   };
 
   return <AuthContext value={value}>{children}</AuthContext>;
