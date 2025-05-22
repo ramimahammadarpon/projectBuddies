@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Web Design",
+    "description": "Creating visually appealing and user-friendly website layouts, focusing on aesthetics, UX/UI, and branding."
+  },
+  {
+    "id": 2,
+    "name": "Web Development",
+    "description": "Building and maintaining websites or web applications using front-end and back-end technologies such as HTML, CSS, JavaScript, and server-side frameworks."
+  },
+  {
+    "id": 3,
+    "name": "Marketing",
+    "description": "Promoting products or services through digital channels like SEO, social media, email campaigns, and paid advertising to reach target audiences."
+  },
+  {
+    "id": 4,
+    "name": "Writing",
+    "description": "Creating content for various purposes including blogs, articles, copywriting, technical documentation, and storytelling."
+  },
+  {
+    "id": 5,
+    "name": "Graphics Design",
+    "description": "Designing visual content such as logos, posters, infographics, and digital assets using tools like Adobe Photoshop and Illustrator."
+  }
+]

@@ -4,9 +4,10 @@ import webDevelopment from "../assets/webDevelopment.jpg";
 import writing from "../assets/writing.jpg";
 import marketing from "../assets/marketing.jpg";
 import graphicDesign from "../assets/graphicDesign.jpeg";
+import { Link } from 'react-router';
 
 const Table = ({myTasks, setMyTasks, myTask, index}) => {
-    const [cardImg, setCardImg] = useState("");
+    const [cardImg, setCardImg] = useState(webDesign);
     useEffect(() => {
         if (myTask.category === "Web Development") {
           setCardImg(webDevelopment);
@@ -40,7 +41,7 @@ const Table = ({myTasks, setMyTasks, myTask, index}) => {
                     <div className="mask mask-squircle h-12 w-12">
                       <img
                         src={cardImg}
-                        alt="Avatar Tailwind CSS Component"
+                        alt=""
                       />
                     </div>
                   </div>
@@ -53,7 +54,7 @@ const Table = ({myTasks, setMyTasks, myTask, index}) => {
               <td>{myTask.deadline}</td>
               <td>{myTask.budget} Taka</td>
               <th>
-                <button className="btn btn-ghost btn-xs">Update</button>
+                <Link to={`/myPostedTasks/update/${myTask._id}`} className="btn btn-ghost btn-xs">Update</Link>
                 <button onClick={handleDeleteTask} className="btn btn-ghost btn-xs">Delete</button>
                 <button className="btn btn-ghost btn-xs">Bids</button>
               </th>

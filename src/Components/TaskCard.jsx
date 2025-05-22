@@ -11,7 +11,7 @@ import { Link } from "react-router";
 
 
 const TaskCard = ({ task }) => {
-  const [cardImg, setCardImg] = useState("");
+  const [cardImg, setCardImg] = useState(webDesign);
 
   useEffect(() => {
     if (task.category === "Web Development") {
@@ -30,7 +30,7 @@ const TaskCard = ({ task }) => {
   return (
     <div className="card bg-base-100 image-full shadow-sm">
       <figure>
-        <img src={cardImg} alt="" />
+        <img src={cardImg} alt="An Image Related to Task" />
       </figure>
       <div className="card-body">
         <h2 className="lg:text-2xl lg:font-bold text-secondary">{task.taskTitle}</h2>
