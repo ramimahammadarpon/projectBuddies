@@ -39,6 +39,7 @@ const AddTask = () => {
               name="taskTitle"
               className="input w-full"
               placeholder="Enter The Title"
+              required
             />
           </fieldset>
 
@@ -48,6 +49,7 @@ const AddTask = () => {
               defaultValue="Select Catergory of Task"
               name="category"
               className="select w-full"
+              required
             >
               <option className="text-xs" disabled={true}>
                 Select Catergory of Task
@@ -62,7 +64,7 @@ const AddTask = () => {
 
           <fieldset className="fieldset rounded-box w-full p-4">
             <label className="label">Deadline</label>
-            <input type="date" name="deadline" className="input w-full" />
+            <input type="date" name="deadline" required className="input w-full" />
           </fieldset>
 
           <fieldset className="fieldset rounded-box w-full p-4">
@@ -72,6 +74,7 @@ const AddTask = () => {
               name="budget"
               className="input w-full"
               placeholder="Enter Your Budget"
+              required
             />
           </fieldset>
 
@@ -106,6 +109,7 @@ const AddTask = () => {
               name="details"
               className="input w-full"
               placeholder="Enter Details of Your Work"
+              required
             />
           </fieldset>
 

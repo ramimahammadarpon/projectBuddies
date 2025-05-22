@@ -27,7 +27,7 @@ const Slide = ({ category }) => {
 
   return (
     <div
-      className="hero min-h-[50vh] lg:min-h-[80vh]"
+      className="hero min-h-[40vh] lg:min-h-[85vh]"
       style={{
         backgroundImage:
           `url(${cardImg})`,
@@ -35,7 +35,7 @@ const Slide = ({ category }) => {
     >
       <div className="hero-overlay"></div>
       <div className="hero-content text-neutral-content text-center">
-        <div className="max-w-md">
+        <div className="max-w-md px-4 lg:max-w-lg">
           <h1 className="mb-5 text-5xl font-bold">{category.name}</h1>
           <p className="mb-5">{category.description}</p>
           <Link to="/addTask" className="btn btn-primary">

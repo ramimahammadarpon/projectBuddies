@@ -17,7 +17,7 @@ const Carousel = () => {
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         autoplay={{
-          delay: 3000,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         navigation

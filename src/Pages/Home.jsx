@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import Carousel from "../Components/Carousel";
+import FeaturedTasks from "../Components/FeaturedTasks";
 
 const Home = () => {
   return (
@@ -14,6 +15,10 @@ const Home = () => {
         >
           <Carousel></Carousel>
         </Suspense>
+      </section>
+
+      <section className="mx-3 md:mx-14 lg:mx-20">
+        <FeaturedTasks></FeaturedTasks>
       </section>
     </div>
   );

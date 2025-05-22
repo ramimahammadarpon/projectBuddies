@@ -17,6 +17,12 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+        loader: ()=>fetch("http://localhost:3000/featuredTasks"),
+        hydrateFallbackElement: (
+          <div className="min-h-[70vh] flex justify-center items-center">
+            <span className="loading loading-spinner w-12"></span>
+          </div>)
+
       },
       {
         path: "/login",
