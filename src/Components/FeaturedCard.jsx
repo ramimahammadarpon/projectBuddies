@@ -6,6 +6,7 @@ import marketing from "../assets/marketing.jpg";
 import graphicDesign from "../assets/graphicDesign.jpeg";
 import { FaHourglassEnd } from "react-icons/fa6";
 import { FaMoneyCheckAlt } from "react-icons/fa";
+import { Link } from "react-router";
 
 const FeaturedCard = ({ task }) => {
   const [cardImg, setCardImg] = useState(webDesign);
@@ -25,7 +26,7 @@ const FeaturedCard = ({ task }) => {
   }, [task.category]);
 
   return (
-    <div className="rounded-lg overflow-hidden shadow-lg bg-base-100">
+    <Link to={`/taskDetails/${task._id}`} className="rounded-lg overflow-hidden shadow-lg bg-base-100 transform hover:scale-105 transition-all duration-200">
       <div className="relative">
         <img src={cardImg} className="w-full h-60 md:h-64 lg:h-72 object-cover" alt="" />
         <div className="flex justify-between px-6 w-full bottom-3 absolute">
@@ -42,7 +43,7 @@ const FeaturedCard = ({ task }) => {
         <h4 className="font-semibold md:text-2xl">{task.taskTitle}</h4>
         <p className="pl-1 text-sm">{task.category}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

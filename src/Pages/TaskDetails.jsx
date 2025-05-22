@@ -89,7 +89,7 @@ const TaskDetails = () => {
             {task.details}
           </p>
           <div className="text-center">
-            <button className="btn btn-primary">Get Started</button>
+            <button className="mx-auto text-lg py-1.5 w-40 flex justify-center rounded-sm font-medium lg:border lg:border-primary text-accent bg-gradient-to-r from-primary to-secondary hover:text-primary hover:bg-none transition-all duration-300 ease-in overflow-hidden cursor-pointer">Bid On This Task</button>
           </div>
         </div>
       </div>

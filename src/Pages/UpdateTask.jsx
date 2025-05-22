@@ -1,28 +1,46 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
+import Swal from "sweetalert2";
 
 const UpdateTask = () => {
   const task = useLoaderData();
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   console.log(task._id);
-  const handleUpdateTask = e => {
+  const handleUpdateTask = (e) => {
     e.preventDefault();
     console.log("clicked");
     const form = e.target;
     const formData = new FormData(form);
     const updatedFormData = Object.fromEntries(formData.entries());
     console.log(updatedFormData);
-    fetch(`http://localhost:3000/tasks/${task._id}`, {
-        method:'PATCH', 
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(updatedFormData)
-    }).then(res=>res.json()).then(data=> {
-        console.log("Data After Update", data);
-    })
-  }
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/tasks/${task._id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFormData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            Swal.fire("Saved!", "", "success");
+            console.log("Data After Update", data);
+          });
+        
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
+  };
   return (
     <div className="mx-3 md:mx-14 lg:mx-24 mt-5 lg:mt-10">
       <div className="shadow-2xl rounded-lg p-4">
@@ -64,7 +82,12 @@ const UpdateTask = () => {
 
           <fieldset className="fieldset rounded-box w-full p-4">
             <label className="label">Deadline</label>
-            <input type="date" name="deadline" defaultValue={task.deadline} className="input w-full" />
+            <input
+              type="date"
+              name="deadline"
+              defaultValue={task.deadline}
+              className="input w-full"
+            />
           </fieldset>
 
           <fieldset className="fieldset rounded-box w-full p-4">
@@ -110,7 +133,6 @@ const UpdateTask = () => {
               className="input w-full"
               defaultValue={task.details}
               placeholder="Enter Details of Your Work"
-              
             />
           </fieldset>
 

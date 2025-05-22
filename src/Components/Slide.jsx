@@ -38,7 +38,7 @@ const Slide = ({ category }) => {
         <div className="max-w-md px-4 lg:max-w-lg">
           <h1 className="mb-5 text-5xl font-bold">{category.name}</h1>
           <p className="mb-5">{category.description}</p>
-          <Link to="/addTask" className="btn btn-primary">
+          <Link to="/addTask" className="mx-auto text-lg py-1.5 w-40 flex justify-center rounded-sm font-medium lg:border lg:border-primary text-accent bg-gradient-to-r from-primary to-secondary hover:text-primary hover:bg-none transition-all duration-300 ease-in overflow-hidden cursor-pointer">
             Post Your Task
           </Link>
         </div>

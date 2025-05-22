@@ -1,18 +1,30 @@
-import React, { useContext } from "react";
-import { Link } from "react-router";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../Auth/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
-
-  const {googleSignup, login} = useContext(AuthContext);
+  const { googleSignup, login } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   console.log(googleSignup);
+  console.log(error);
 
   const handleGoogleSignup = () => {
-    googleSignup().then(result=> {
-      console.log(result);
-    }).catch(error => console.log(error));
-  }
+    setError("");
+    googleSignup()
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          title: "Signup Sucessful!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate("/");
+      })
+      .catch((error) => setError(error.messege));
+  };
 
   const handleLogin = e => {
     e.preventDefault();
@@ -21,11 +33,20 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
 
-    login(email, password).then(result=>{
-      console.log(result)
-    }).catch(error=> console.log(error));
+    setError("");
 
-  }
+    login(email, password)
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          title: "Login Successful!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate("/");
+      })
+      .catch((error) => setError(error.message));
+  };
 
   return (
     <div className="hero bg-base-200 min-h-[90vh]">
@@ -56,8 +77,13 @@ const Login = () => {
               Login
             </button>
             <p className="text-center text-lg">or</p>
-            <button type="button" onClick={handleGoogleSignup} className="btn text-accent bg-gradient-to-r from-primary to-secondary border-primary hover:text-primary hover:bg-transparent hover:bg-none transition-all duration-300 ease-in-out">
-              <FcGoogle size={20} />Sign Up With Google
+            <button
+              type="button"
+              onClick={handleGoogleSignup}
+              className="btn text-accent bg-gradient-to-r from-primary to-secondary border-primary hover:text-primary hover:bg-transparent hover:bg-none transition-all duration-300 ease-in-out"
+            >
+              <FcGoogle size={20} />
+              Sign Up With Google
             </button>
             <p className="text-accent">
               Don't have any Account?{" "}
@@ -65,6 +91,8 @@ const Login = () => {
                 sign up Here
               </Link>
             </p>
+
+            {error && <p className="text-red-500">{error}</p>}
           </form>
         </div>
       </div>

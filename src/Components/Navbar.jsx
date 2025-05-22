@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import userPhoto from "../assets/userPhoto.jpeg";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [theme, setTheme] = useState(true);
@@ -20,6 +21,16 @@ const Navbar = () => {
   const handleLogout = () => {
     logout().then(() => {
       console.log("logout sucessfull");
+      toast.success("Successfully Logged Out", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     });
   };
 
@@ -64,20 +75,24 @@ const Navbar = () => {
           {user ? (
             <img
               src={user.photoURL}
-              onClick={()=>setClicked(!clicked)}
+              onClick={() => setClicked(!clicked)}
               className="w-8 object-cover md:w-10 aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
               alt=""
             />
           ) : (
             <img
               src={userPhoto}
-              onClick={()=>setClicked(!clicked)}
+              onClick={() => setClicked(!clicked)}
               className="w-8 md:w-10 object-cover aspect-square ml-24 md:ml-52 lg:mr-5 lg:ml-10 rounded-full border border-secondary cursor-pointer"
               alt=""
             />
           )}
           <ul
-            className={`absolute top-14 lg:top-16 text-accent bg-base-200 w-40 lg:group-hover:opacity-100 lg:invisible lg:group-hover:visible right-0 p-2 rounded-lg transition-all duration-150 ease-in-out flex flex-col ${clicked? "visible opacity-100 lg:invisible" : "group-hover:opacity-100 invisible group-hover:visible" }`}
+            className={`absolute top-14 lg:top-16 text-accent bg-base-200 w-40 lg:group-hover:opacity-100 lg:invisible lg:group-hover:visible right-0 p-2 rounded-lg transition-all duration-75 flex flex-col ${
+              clicked
+                ? "visible opacity-100 lg:invisible"
+                : "group-hover:opacity-100 invisible group-hover:visible"
+            }`}
           >
             {user ? (
               <>

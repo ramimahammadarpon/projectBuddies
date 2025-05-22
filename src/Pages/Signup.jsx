@@ -1,12 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
+import Swal from "sweetalert2";
 
 const Signup = () => {
-  const { signUpWithEmail, update, setUser, googleSignup } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { signUpWithEmail, update, setUser, googleSignup } =
+    useContext(AuthContext);
+    const [error, setError] = useState("");
+    console.log(error);
 
   const handleSignUp = (e) => {
+    setError("");
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -21,18 +27,32 @@ const Signup = () => {
           .then((result) => {
             console.log(result?.user);
             setUser({ ...result?.user, displayName: name, photoURL: photoURL });
+            Swal.fire({
+              title: "Signup Sucessful!",
+              icon: "success",
+              draggable: true,
+            });
+            navigate('/');
           })
-          .catch((error) => console.log(error));
+          .catch((error) => setError(error.message));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error.message));
   };
 
-
   const handleGoogleSignup = () => {
-    googleSignup().then(result=> {
-      console.log(result);
-    }).catch(error => console.log(error));
-  }
+    setError("");
+    googleSignup()
+      .then((result) => {
+        console.log(result);
+        Swal.fire({
+          title: "Signup Sucessful!",
+          icon: "success",
+          draggable: true,
+        });
+        navigate('/');
+      })
+      .catch((error) => setError(error.message));
+  };
 
   return (
     <div className="hero bg-base-200 lg:min-h-[90vh] min-h-[80vh] px-3">
@@ -101,16 +121,15 @@ const Signup = () => {
               At least one lowercase letter <br />
               At least one uppercase letter
             </p>
-            <div>
-              <a className="link link-hover hover:text-primary">
-                Forgot password?
-              </a>
-            </div>
             <button className="btn mt-4 text-primary bg-transparent border-primary hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-accent transition-all duration-300 ease-in-out">
               Sign Up
             </button>
             <p className="text-center text-lg">or</p>
-            <button onClick={handleGoogleSignup}type="button" className="btn text-accent bg-gradient-to-r from-primary to-secondary border-primary hover:text-primary hover:bg-transparent hover:bg-none transition-all duration-300 ease-in-out">
+            <button
+              onClick={handleGoogleSignup}
+              type="button"
+              className="btn text-accent bg-gradient-to-r from-primary to-secondary border-primary hover:text-primary hover:bg-transparent hover:bg-none transition-all duration-300 ease-in-out"
+            >
               <FcGoogle size={20} />
               Sign Up With Google
             </button>
@@ -120,6 +139,7 @@ const Signup = () => {
                 Login Here
               </Link>
             </p>
+            {error&&<p className="text-red-500 mt-2">{error}</p>}
           </form>
         </div>
       </div>

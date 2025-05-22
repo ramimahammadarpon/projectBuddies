@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Auth/AuthContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AddTask = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleAddTask = (e) => {
     e.preventDefault();
@@ -11,15 +14,28 @@ const AddTask = () => {
     const newTask = Object.fromEntries(formData.entries());
     console.log(newTask);
 
-    fetch('http://localhost:3000/tasks', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newTask)
-    }).then(res=>res.json()).then(data=>{
-        console.log("Data from Database", data);
+    fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTask),
     })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Data from Database", data);
+        toast.success("Posted Task Sucessfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        navigate('/browseTasks')
+      });
   };
 
   return (
@@ -64,7 +80,12 @@ const AddTask = () => {
 
           <fieldset className="fieldset rounded-box w-full p-4">
             <label className="label">Deadline</label>
-            <input type="date" name="deadline" required className="input w-full" />
+            <input
+              type="date"
+              name="deadline"
+              required
+              className="input w-full"
+            />
           </fieldset>
 
           <fieldset className="fieldset rounded-box w-full p-4">
