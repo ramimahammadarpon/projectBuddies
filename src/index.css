@@ -29,3 +29,7 @@
 a.active{
   @apply bg-primary
 }
+
+.swiper-button-next, .swiper-button-prev{
+  color: #29d7ac !important;
+}
