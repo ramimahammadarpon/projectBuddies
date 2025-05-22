@@ -9,6 +9,7 @@ import BrowseTasks from "../Pages/BrowseTasks";
 import TaskDetails from "../Pages/TaskDetails";
 import MyPostedTask from "../Pages/MyPostedTask";
 import UpdateTask from "../Pages/UpdateTask";
+import Bids from "../Pages/Bids";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -93,6 +94,11 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3000/tasks/${params.id}`),
       },
+      {
+        path: 'myPostedTasks/bids/:id',
+        element: <PrivateRoute><Bids></Bids></PrivateRoute>,
+        loader: ()=> fetch("http://localhost:3000/bids")
+      }
     ],
   },
 ]);

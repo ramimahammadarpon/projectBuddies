@@ -80,7 +80,7 @@ const Table = ({ myTasks, setMyTasks, myTask, index }) => {
         <button onClick={handleDeleteTask} className="btn btn-ghost btn-xs">
           Delete
         </button>
-        <button className="btn btn-ghost btn-xs">Bids</button>
+        <Link to={`/myPostedTasks/bids/${myTask._id}`} className="btn btn-ghost btn-xs">Bids</Link>
       </th>
     </tr>
   );

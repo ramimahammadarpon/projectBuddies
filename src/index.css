@@ -13,13 +13,15 @@
   --color-secondary: #21ccc3;
   --color-base-200: #f0f2f5;
   --color-accent: #2b2b2b;
+  --color-base-300: #001524;
 }
 @plugin "daisyui/theme" {
   name: "dark";
   --color-primary: #29d7ac;
   --color-secondary: #21ccc3;
   --color-base-200: #0a1f17;
-  --color-accent: #fff
+  --color-accent: #fff;
+  --color-base-300: #0a1f17;
 }
 
 *{

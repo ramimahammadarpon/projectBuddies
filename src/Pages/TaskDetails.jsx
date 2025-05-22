@@ -4,19 +4,25 @@ import webDevelopment from "../assets/webDevelopment.jpg";
 import writing from "../assets/writing.jpg";
 import marketing from "../assets/marketing.jpg";
 import graphicDesign from "../assets/graphicDesign.jpeg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { BiSolidCategory } from "react-icons/bi";
 import { FaHourglassEnd } from "react-icons/fa6";
 import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
+import { AuthContext } from "../Auth/AuthContext";
 
 const TaskDetails = () => {
   const task = useLoaderData();
+  const {user} = useContext(AuthContext);
   console.log(task);
+  console.log(user);
   const [cardImg, setCardImg] = useState("");
+  // const [bid, setBid] = useState(0);
+  const compareMail = user?.email === task.email;
 
   useEffect(() => {
+
     if (task.category === "Web Development") {
       setCardImg(webDevelopment);
     } else if (task.category === "Web Design") {
@@ -29,6 +35,31 @@ const TaskDetails = () => {
       setCardImg(graphicDesign);
     }
   }, [task.category]);
+
+  const handleBid = () => {
+    const taskId = task._id;
+    const taskEmail = task.email;
+    const name = user.displayName;
+    const email = user.email;
+    const img = user.photoURL;
+    const newBid = {
+      taskId, 
+      taskEmail, 
+      name, 
+      email,
+      img
+    }
+    console.log(newBid);
+    fetch("http://localhost:3000/bids", {
+      method: 'POST', 
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newBid)
+    }).then(res=>res.json()).then(data=>{
+      console.log("Data After posting bid", data);
+    })
+  }
 
   return (
     <div
@@ -43,6 +74,7 @@ const TaskDetails = () => {
           <h1 className="mb-10 text-2xl lg:text-5xl text-center font-bold text-secondary">
             {task.taskTitle}
           </h1>
+          <h3 className="font-semibold text-[#a0f2db] text-center text-2xl lg:mb-6">You Bid For </h3>
           <div className="flex justify-center lg:gap-10">
             <div className="space-y-6">
               <p className="lg:text-xl font-semibold flex items-center lg:gap-5">
@@ -89,7 +121,7 @@ const TaskDetails = () => {
             {task.details}
           </p>
           <div className="text-center">
-            <button className="mx-auto text-lg py-1.5 w-40 flex justify-center rounded-sm font-medium lg:border lg:border-primary text-accent bg-gradient-to-r from-primary to-secondary hover:text-primary hover:bg-none transition-all duration-300 ease-in overflow-hidden cursor-pointer">Bid On This Task</button>
+            <button disabled={compareMail} onClick={handleBid} className={`mx-auto ${!compareMail? 'cursor-pointer hover:text-primary hover:bg-none' : 'cursor-not-allowed'} text-lg py-1.5 w-40 flex justify-center rounded-sm font-medium lg:border lg:border-primary text-accent bg-gradient-to-r from-primary to-secondary  transition-all duration-300 ease-in overflow-hidden`} >Bid On This Task</button>
           </div>
         </div>
       </div>
