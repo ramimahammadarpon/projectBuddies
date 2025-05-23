@@ -17,9 +17,11 @@ const Bids = () => {
 
   console.log(myBidsData);
   return (
-    <div className="overflow-x-auto mx-3 md:mx-16 lg:mx-24 mt-3 md:mt-6 lg:mt-10">
+    <div className="overflow-x-auto mx-3 md:mx-16 lg:mx-24 mt-3 md:mt-6 min-h-[70vh] lg:mt-10">
+
+      <h1 className="text-primary font-bold text-2xl text-center mb-5">Bids For Your Task</h1>
+
       <table className="table">
-        {/* head */}
         <thead>
           <tr>
             <th>No</th>
@@ -28,7 +30,6 @@ const Bids = () => {
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
           {myBidsData.map((bidsData, index) => (
             <BidsTable
               key={index}

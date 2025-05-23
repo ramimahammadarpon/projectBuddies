@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 const AddTask = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  console.log(user);
   const handleAddTask = (e) => {
     e.preventDefault();
     const form = e.target;

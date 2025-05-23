@@ -4,7 +4,7 @@ import webDevelopment from "../assets/webDevelopment.jpg";
 import writing from "../assets/writing.jpg";
 import marketing from "../assets/marketing.jpg";
 import graphicDesign from "../assets/graphicDesign.jpeg";
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { BiSolidCategory } from "react-icons/bi";
 import { FaHourglassEnd } from "react-icons/fa6";
@@ -12,16 +12,22 @@ import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { AuthContext } from "../Auth/AuthContext";
 
+const bidsDataPromise = fetch("http://localhost:3000/bids").then(res=>res.json());
+
 const TaskDetails = () => {
+  const [disabled, setDisabled] = useState(false)
   const task = useLoaderData();
   const {user} = useContext(AuthContext);
   console.log(task);
   console.log(user);
+  const bidsData = use(bidsDataPromise);
   const [cardImg, setCardImg] = useState("");
-  // const [bid, setBid] = useState(0);
+  const [bid, setBid] = useState(0);
   const compareMail = user?.email === task.email;
 
   useEffect(() => {
+    const bidsForThisTask = bidsData.filter(data=> data.taskId === task._id);
+    setBid(bidsForThisTask.length);
 
     if (task.category === "Web Development") {
       setCardImg(webDevelopment);
@@ -34,13 +40,15 @@ const TaskDetails = () => {
     } else if (task.category === "Graphics Design") {
       setCardImg(graphicDesign);
     }
-  }, [task.category]);
+  }, [task.category, task._id, bidsData]);
+
+  console.log(bid);
 
   const handleBid = () => {
     const taskId = task._id;
     const taskEmail = task.email;
     const name = user.displayName;
-    const email = user.email;
+    const email = user?.email;
     const img = user.photoURL;
     const newBid = {
       taskId, 
@@ -59,6 +67,11 @@ const TaskDetails = () => {
     }).then(res=>res.json()).then(data=>{
       console.log("Data After posting bid", data);
     })
+    setDisabled(true);
+    const bidsForThisTask = bidsData.filter(data=> data.taskId === task._id);
+    setBid(bidsForThisTask.length +1);
+    document.getElementById("bid").innerText = `You Bid For ${bid + 1} opportunities`;
+
   }
 
   return (
@@ -74,7 +87,7 @@ const TaskDetails = () => {
           <h1 className="mb-10 text-2xl lg:text-5xl text-center font-bold text-secondary">
             {task.taskTitle}
           </h1>
-          <h3 className="font-semibold text-[#a0f2db] text-center text-2xl lg:mb-6">You Bid For </h3>
+          <h3 id="bid" className="font-semibold text-[#a0f2db] text-center text-2xl lg:mb-6">Current Bid: {bid}</h3>
           <div className="flex justify-center lg:gap-10">
             <div className="space-y-6">
               <p className="lg:text-xl font-semibold flex items-center lg:gap-5">
@@ -121,7 +134,7 @@ const TaskDetails = () => {
             {task.details}
           </p>
           <div className="text-center">
-            <button disabled={compareMail} onClick={handleBid} className={`mx-auto ${!compareMail? 'cursor-pointer hover:text-primary hover:bg-none' : 'cursor-not-allowed'} text-lg py-1.5 w-40 flex justify-center rounded-sm font-medium lg:border lg:border-primary text-accent bg-gradient-to-r from-primary to-secondary  transition-all duration-300 ease-in overflow-hidden`} >Bid On This Task</button>
+            <button disabled={compareMail||disabled} onClick={handleBid} className={`mx-auto ${compareMail||disabled? "cursor-not-allowed opacity-50" : 'cursor-pointer hover:text-primary hover:bg-none'} text-lg py-1.5 w-40 flex justify-center rounded-sm font-medium lg:border lg:border-primary text-accent bg-gradient-to-r from-primary to-secondary  transition-all duration-300 ease-in overflow-hidden`} >Bid On This Task</button>
           </div>
         </div>
       </div>

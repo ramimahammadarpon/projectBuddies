@@ -3,13 +3,14 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 import Swal from "sweetalert2";
+import { auth } from "../firebase.init";
 
 const Signup = () => {
   const navigate = useNavigate();
   const { signUpWithEmail, update, setUser, googleSignup } =
     useContext(AuthContext);
-    const [error, setError] = useState("");
-    console.log(error);
+  const [error, setError] = useState("");
+  console.log(error);
 
   const handleSignUp = (e) => {
     setError("");
@@ -26,13 +27,19 @@ const Signup = () => {
         update({ displayName: name, photoURL: photoURL })
           .then((result) => {
             console.log(result?.user);
-            setUser({ ...result?.user, displayName: name, photoURL: photoURL });
+            const currentUser = auth.currentUser;
+            setUser({
+              uid: currentUser.uid,
+              email: currentUser.email,
+              displayName: name,
+              photoURL: photoURL,
+            });
             Swal.fire({
               title: "Signup Sucessful!",
               icon: "success",
               draggable: true,
             });
-            navigate('/');
+            navigate("/");
           })
           .catch((error) => setError(error.message));
       })
@@ -49,7 +56,7 @@ const Signup = () => {
           icon: "success",
           draggable: true,
         });
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => setError(error.message));
   };
@@ -139,7 +146,7 @@ const Signup = () => {
                 Login Here
               </Link>
             </p>
-            {error&&<p className="text-red-500 mt-2">{error}</p>}
+            {error && <p className="text-red-500 mt-2">{error}</p>}
           </form>
         </div>
       </div>

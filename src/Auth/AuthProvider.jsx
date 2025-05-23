@@ -36,11 +36,24 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   }
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
-      setUser(user);
-      setLoading(false);
-    });
+    const unsubscribe = onAuthStateChanged(auth, async(user) => {
+
+        if(user){
+          await user.reload();
+          const refreshedUser = auth.currentUser
+
+          setUser({
+            uid: refreshedUser.uid,
+            email: refreshedUser.email,
+            displayName: refreshedUser.displayName,
+            photoURL: refreshedUser.photoURL
+          });
+        }
+        else{
+          setUser(null);
+        }
+        setLoading(false);
+  });
 
     return () => unsubscribe();
   }, []);
@@ -53,7 +66,7 @@ const AuthProvider = ({ children }) => {
     logout,
     user,
     setUser,
-    loading
+    loading,
   };
 
   return <AuthContext value={value}>{children}</AuthContext>;

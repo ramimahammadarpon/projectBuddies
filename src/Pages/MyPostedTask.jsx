@@ -14,9 +14,8 @@ const MyPostedTask = () => {
   console.log(myTasks);
 
   return (
-    <div className="overflow-x-auto mx-3 md:mx-16 lg:mx-24 mt-3 md:mt-6 lg:mt-10">
+    <div className="overflow-x-auto mx-3 md:mx-16 lg:mx-24 mt-3 md:mt-6 lg:mt-10 min-h-[70vh]">
       <table className="table">
-        {/* head */}
         <thead>
           <tr>
             <th>No</th>
@@ -27,7 +26,6 @@ const MyPostedTask = () => {
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
           {myTasks.map((myTask, index) => <Table myTasks={myTasks} setMyTasks={setMyTasks} myTask={myTask} index={index}></Table>)}
         </tbody>
       </table>
