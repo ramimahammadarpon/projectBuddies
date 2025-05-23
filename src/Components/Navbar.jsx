@@ -3,6 +3,7 @@ import userPhoto from "../assets/userPhoto.jpeg";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 import { toast } from "react-toastify";
+import { Typewriter } from "react-simple-typewriter";
 
 const Navbar = () => {
   const [theme, setTheme] = useState(true);
@@ -64,7 +65,15 @@ const Navbar = () => {
       <div className="navbar-start">
         <a className="btn btn-ghost text-xl md:text-2xl flex gap-0">
           <span className="text-accent font-light">Project</span>
-          <span className="text-primary">Buddies</span>
+          <span className="text-primary">
+            <Typewriter
+              words={["Buddies"]}
+              loop={true}
+              delaySpeed={1000}
+              typeSpeed={40}
+              deleteSpeed={40}
+            />
+          </span>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
