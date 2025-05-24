@@ -12,7 +12,7 @@ import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { AuthContext } from "../Auth/AuthContext";
 
-const bidsDataPromise = fetch("http://localhost:3000/bids").then(res=>res.json());
+const bidsDataPromise = fetch("https://b11-a10-server-side.vercel.app/bids").then(res=>res.json());
 
 const TaskDetails = () => {
   const [disabled, setDisabled] = useState(false)
@@ -59,7 +59,7 @@ const TaskDetails = () => {
       img
     }
     console.log(newBid);
-    fetch("http://localhost:3000/bids", {
+    fetch("https://b11-a10-server-side.vercel.app/bids", {
       method: 'POST', 
       headers: {
         "Content-Type": "application/json"

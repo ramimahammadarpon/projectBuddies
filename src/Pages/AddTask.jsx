@@ -18,7 +18,7 @@ const AddTask = () => {
     const newTask = Object.fromEntries(formData.entries());
     console.log(newTask);
 
-    fetch("http://localhost:3000/tasks", {
+    fetch("https://b11-a10-server-side.vercel.app/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,12 +66,12 @@ const AddTask = () => {
           <fieldset className="fieldset rounded-box w-full p-4">
             <label className="label">Category</label>
             <select
-              defaultValue="Select Catergory of Task"
+              defaultValue=""
               name="category"
               className="select w-full"
               required
             >
-              <option className="text-xs" disabled={true}>
+              <option className="text-xs" disabled={true} value="">
                 Select Catergory of Task
               </option>
               <option className="text-xs">Web Development</option>

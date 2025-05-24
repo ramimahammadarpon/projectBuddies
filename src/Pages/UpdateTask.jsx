@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 import Swal from "sweetalert2";
 
 const UpdateTask = () => {
+  const navigate = useNavigate();
   useEffect(()=> {
     document.title = "ProjectBuddies | Update Task"
   }, []);
@@ -26,7 +27,7 @@ const UpdateTask = () => {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/tasks/${task._id}`, {
+        fetch(`https://b11-a10-server-side.vercel.app/tasks/${task._id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -37,6 +38,7 @@ const UpdateTask = () => {
           .then((data) => {
             Swal.fire("Saved!", "", "success");
             console.log("Data After Update", data);
+            navigate('/myPostedTasks');
           });
         
       } else if (result.isDenied) {

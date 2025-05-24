@@ -3,10 +3,11 @@ import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../Auth/AuthContext";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  useEffect(()=> {
-    document.title = "ProjectBuddies | Login"
+  useEffect(() => {
+    document.title = "ProjectBuddies | Login";
   }, []);
   const { googleSignup, login } = useContext(AuthContext);
   const [error, setError] = useState("");
@@ -26,10 +27,22 @@ const Login = () => {
         });
         navigate("/");
       })
-      .catch((error) => setError(error.messege));
+      .catch((error) => {
+        setError(error.message);
+        toast.error(`${error.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
   };
 
-  const handleLogin = e => {
+  const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
@@ -48,7 +61,19 @@ const Login = () => {
         });
         navigate("/");
       })
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        setError(error.message);
+        toast.error(`${error.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
   };
 
   return (

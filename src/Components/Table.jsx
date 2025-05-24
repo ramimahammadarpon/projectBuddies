@@ -34,7 +34,7 @@ const Table = ({ myTasks, setMyTasks, myTask, index }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/tasks/${myTask._id}`, {
+        fetch(`https://b11-a10-server-side.vercel.app/tasks/${myTask._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

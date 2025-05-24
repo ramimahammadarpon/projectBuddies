@@ -4,10 +4,11 @@ import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 import Swal from "sweetalert2";
 import { auth } from "../firebase.init";
+import { toast } from "react-toastify";
 
 const Signup = () => {
-  useEffect(()=> {
-    document.title = "ProjectBuddies | Sign Up"
+  useEffect(() => {
+    document.title = "ProjectBuddies | Sign Up";
   }, []);
   const navigate = useNavigate();
   const { signUpWithEmail, update, setUser, googleSignup } =
@@ -44,9 +45,33 @@ const Signup = () => {
             });
             navigate("/");
           })
-          .catch((error) => setError(error.message));
+          .catch((error) => {
+            setError(error.message);
+            toast.error(`${error.message}`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          });
       })
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+         setError(error.message);
+        toast.error(`${error.message}`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+      });
   };
 
   const handleGoogleSignup = () => {
@@ -61,7 +86,19 @@ const Signup = () => {
         });
         navigate("/");
       })
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        setError(error.message);
+        toast.error(`${error.message}`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: false,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+      });
   };
 
   return (
@@ -122,7 +159,7 @@ const Signup = () => {
                 minLength="6"
                 name="password"
                 pattern="(?=.*[a-z])(?=.*[A-Z]).{6,}"
-                title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+                title="Must be at least 6 characters, At least one lowercase letter, At least one uppercase letter"
               />
             </label>
             <p className="validator-hint hidden">
