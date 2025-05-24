@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../Auth/AuthContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
 const AddTask = () => {
+
+  useEffect(()=> {
+    document.title = "ProjectBuddies | Add Task"
+  }, []);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   console.log(user);

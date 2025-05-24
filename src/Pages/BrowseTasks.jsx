@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLoaderData } from 'react-router';
 import TaskCard from '../Components/TaskCard';
 
 const BrowseTasks = () => {
+    useEffect(()=> {
+    document.title = "ProjectBuddies | Browse Tasks"
+  }, []);
     const tasks = useLoaderData();
     console.log(tasks);
 

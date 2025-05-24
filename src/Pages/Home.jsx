@@ -1,9 +1,13 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import Carousel from "../Components/Carousel";
 import FeaturedTasks from "../Components/FeaturedTasks";
 import Faq from "../Components/Faq";
+import SiteOverview from "../Components/SiteOverview";
 
 const Home = () => {
+  useEffect(()=> {
+    document.title = "ProjectBuddies | Home"
+  }, []);
   return (
     <div>
       <section>
@@ -22,9 +26,12 @@ const Home = () => {
         <FeaturedTasks></FeaturedTasks>
       </section>
 
-
       <section>
         <Faq></Faq>
+      </section>
+
+      <section>
+        <SiteOverview></SiteOverview>
       </section>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import { auth } from "../firebase.init";
 
 const Signup = () => {
+  useEffect(()=> {
+    document.title = "ProjectBuddies | Sign Up"
+  }, []);
   const navigate = useNavigate();
   const { signUpWithEmail, update, setUser, googleSignup } =
     useContext(AuthContext);

@@ -8,6 +8,7 @@ const MyPostedTask = () => {
   const { user } = useContext(AuthContext);
   const [myTasks, setMyTasks] = useState([]);
   useEffect(() => {
+    document.title = "ProjectBuddies | Posted Tasks"
     const newTask = tasks.filter((task) => task.email === user.email);
     setMyTasks(newTask);
   }, [tasks, user.email]);

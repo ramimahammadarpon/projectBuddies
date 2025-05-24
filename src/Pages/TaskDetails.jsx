@@ -26,6 +26,7 @@ const TaskDetails = () => {
   const compareMail = user?.email === task.email;
 
   useEffect(() => {
+    document.title = "ProjectBuddies | Task Details"
     const bidsForThisTask = bidsData.filter(data=> data.taskId === task._id);
     setBid(bidsForThisTask.length);
 

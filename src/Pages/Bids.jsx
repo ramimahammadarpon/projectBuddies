@@ -10,6 +10,7 @@ const Bids = () => {
   const [myBidsData, setMyBidsData] = useState([]);
   console.log(bids);
   useEffect(() => {
+    document.title = "ProjectBuddies | Bids"
     const filteredBids = bids.filter((bid) => bid.taskEmail === user.email);
     const filterBidsWithName = filteredBids.filter((bid) => bid.taskId === id);
     setMyBidsData(filterBidsWithName);

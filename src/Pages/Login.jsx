@@ -1,10 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../Auth/AuthContext";
 import Swal from "sweetalert2";
 
 const Login = () => {
+  useEffect(()=> {
+    document.title = "ProjectBuddies | Login"
+  }, []);
   const { googleSignup, login } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();

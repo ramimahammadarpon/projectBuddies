@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 import Swal from "sweetalert2";
 
 const UpdateTask = () => {
+  useEffect(()=> {
+    document.title = "ProjectBuddies | Update Task"
+  }, []);
   const task = useLoaderData();
   const { user } = useContext(AuthContext);
   console.log(task._id);
