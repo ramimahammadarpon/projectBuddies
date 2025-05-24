@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "question": "What is this platform about?",
+    "answer": "This platform connects freelancers with clients to complete tasks in categories like web development, design, writing, and more."
+  },
+  {
+    "id": 2,
+    "question": "How do I post a task?",
+    "answer": "To post a task, sign in to your account, click on 'Post a Task' from the dashboard, and fill out the required details such as title, category, budget, and deadline."
+  },
+  {
+    "id": 3,
+    "question": "How can I bid on a task?",
+    "answer": "Browse available tasks, click on a task you're interested in, and click the 'Bid On This Task' button. Note: You cannot bid on your own posted tasks."
+  },
+  {
+    "id": 4,
+    "question": "Can I edit or delete my posted task?",
+    "answer": "Yes, you can edit or delete your tasks from your profile dashboard under the 'My Tasks' section."
+  },
+  {
+    "id": 5,
+    "question": "What happens after I place a bid?",
+    "answer": "The task poster will review all bids and choose the freelancer they prefer. If selected, you’ll receive a notification or email."
+  },
+  {
+    "id": 6,
+    "question": "Is there any fee for using this platform?",
+    "answer": "Posting tasks and bidding is free. However, a small commission may be applied on successful payments between clients and freelancers."
+  },
+  {
+    "id": 7,
+    "question": "How do I contact support?",
+    "answer": "You can reach out to our support team via the 'Contact Us' page or by emailing support@example.com."
+  },
+  {
+    "id": 8,
+    "question": "Can I see how many people have bid on a task?",
+    "answer": "Yes, each task displays the number of bids it has received so far."
+  }
+]

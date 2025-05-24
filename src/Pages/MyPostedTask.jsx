@@ -26,7 +26,7 @@ const MyPostedTask = () => {
           </tr>
         </thead>
         <tbody>
-          {myTasks.map((myTask, index) => <Table myTasks={myTasks} setMyTasks={setMyTasks} myTask={myTask} index={index}></Table>)}
+          {myTasks.map((myTask, index) => <Table key={index} myTasks={myTasks} setMyTasks={setMyTasks} myTask={myTask} index={index}></Table>)}
         </tbody>
       </table>
     </div>

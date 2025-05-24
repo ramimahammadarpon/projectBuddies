@@ -70,8 +70,8 @@ const Navbar = () => {
               words={["Buddies"]}
               loop={true}
               delaySpeed={1000}
-              typeSpeed={40}
-              deleteSpeed={40}
+              typeSpeed={30}
+              deleteSpeed={30}
             />
           </span>
         </a>

@@ -10,6 +10,7 @@ import TaskDetails from "../Pages/TaskDetails";
 import MyPostedTask from "../Pages/MyPostedTask";
 import UpdateTask from "../Pages/UpdateTask";
 import Bids from "../Pages/Bids";
+import ErrorPage from "../Pages/ErrorPage";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -93,12 +94,24 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/tasks/${params.id}`),
+         hydrateFallbackElement: (
+          <div className="min-h-[70vh] flex justify-center items-center">
+            <span className="loading loading-spinner w-12"></span>
+          </div>)
       },
       {
         path: 'myPostedTasks/bids/:id',
         element: <PrivateRoute><Bids></Bids></PrivateRoute>,
-        loader: ()=> fetch("http://localhost:3000/bids")
+        loader: ()=> fetch("http://localhost:3000/bids"),
+         hydrateFallbackElement: (
+          <div className="min-h-[70vh] flex justify-center items-center">
+            <span className="loading loading-spinner w-12"></span>
+          </div>)
       }
     ],
   },
+  {
+    path: '/*',
+    Component: ErrorPage
+  }
 ]);

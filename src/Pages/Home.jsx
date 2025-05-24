@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import Carousel from "../Components/Carousel";
 import FeaturedTasks from "../Components/FeaturedTasks";
+import Faq from "../Components/Faq";
 
 const Home = () => {
   return (
@@ -19,6 +20,11 @@ const Home = () => {
 
       <section className="mx-3 md:mx-14 lg:mx-20">
         <FeaturedTasks></FeaturedTasks>
+      </section>
+
+
+      <section>
+        <Faq></Faq>
       </section>
     </div>
   );
