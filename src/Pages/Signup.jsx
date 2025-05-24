@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 import Swal from "sweetalert2";
-import { auth } from "../firebase.init";
+// import { auth } from "../firebase.init";
 import { toast } from "react-toastify";
 
 const Signup = () => {
@@ -29,15 +29,10 @@ const Signup = () => {
       .then((result) => {
         console.log(result.user);
         update({ displayName: name, photoURL: photoURL })
-          .then((result) => {
-            console.log(result?.user);
-            const currentUser = auth.currentUser;
-            setUser({
-              uid: currentUser.uid,
-              email: currentUser.email,
-              displayName: name,
-              photoURL: photoURL,
-            });
+          .then(() => {
+            const user = result.user;
+            setUser({...user, displayName:name, photoURL: photoURL});
+            console.log("hello World");
             Swal.fire({
               title: "Signup Sucessful!",
               icon: "success",

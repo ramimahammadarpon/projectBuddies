@@ -38,21 +38,9 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, async(user) => {
-
-        if(user){
-          await user.reload();
-          const refreshedUser = auth.currentUser
-
-          setUser({
-            uid: refreshedUser.uid,
-            email: refreshedUser.email,
-            displayName: refreshedUser.displayName,
-            photoURL: refreshedUser.photoURL
-          });
-        }
-        else{
-          setUser(null);
-        }
+        
+        console.log(user);
+        setUser(user);
         setLoading(false);
   });
 
