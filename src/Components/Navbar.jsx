@@ -57,6 +57,11 @@ const Navbar = () => {
           My Posted Tasks
         </NavLink>
       </li>
+      <li>
+        <NavLink className="justify-end" to="/dashboard">
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
 

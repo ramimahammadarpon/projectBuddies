@@ -14,6 +14,9 @@ import ErrorPage from "../Pages/ErrorPage";
 import Terms from "../Pages/Terms";
 import Privacy from "../Pages/Privacy";
 import DeveloperResources from "../Pages/DeveloperRousources";
+import DashBoad from "../Layouts/DashBoad";
+import Overview from "../Pages/Overview";
+import AllItems from "../Pages/AllItems";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -114,6 +117,20 @@ export const router = createBrowserRouter([
         Component: DeveloperResources
       }
     ],
+  },
+  {
+    path:"dashboard",
+    element: <PrivateRoute><DashBoad></DashBoad></PrivateRoute>,
+    children:[
+      {
+        index: true,
+        element: <PrivateRoute><Overview></Overview></PrivateRoute>
+      },
+      {
+        path: "allTasks",
+        element: <PrivateRoute><AllItems></AllItems></PrivateRoute>
+      }
+    ]
   },
   {
     path: '/*',
