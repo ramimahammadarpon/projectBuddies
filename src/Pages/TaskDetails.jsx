@@ -115,7 +115,7 @@ const TaskDetails = () => {
               <p className="lg:text-xl font-semibold">:</p>
             </div>
             <div className="space-y-6">
-              <p className="lg:text-xl font-semibold text-primary flex items-center gap-5">{task.budget} Taka
+              <p className="lg:text-xl font-semibold text-primary flex items-center gap-5">${task.budget}
               </p>
               <p className="lg:text-xl font-semibold text-primary flex items-center gap-5">
                 {task.category}

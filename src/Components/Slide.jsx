@@ -27,7 +27,7 @@ const Slide = ({ category }) => {
 
   return (
     <div
-      className="hero min-h-[40vh] lg:min-h-[85vh]"
+      className="hero min-h-[40vh] lg:min-h-[70vh]"
       style={{
         backgroundImage:
           `url(${cardImg})`,

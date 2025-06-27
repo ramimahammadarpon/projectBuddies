@@ -28,7 +28,7 @@ const TaskCard = ({ task }) => {
   }, [task.category]);
 
   return (
-    <div className="card bg-base-100 image-full shadow-sm">
+    <div className="card bg-base-100 image-full lg:h-80 shadow-sm">
       <figure>
         <img src={cardImg} alt="An Image Related to Task" />
       </figure>
@@ -40,7 +40,7 @@ const TaskCard = ({ task }) => {
             <p className="flex flex-row lg:text-lg items-center gap-4 text-lg"><FaHourglassEnd size={20} /> {task.deadline}</p>
         </div>
         <div className="card-actions">
-          <Link to={`/taskDetails/${task._id}`} className="cursor-pointer mt-2 text-lg text-primary">View Details...</Link>
+          <Link to={`/taskDetails/${task._id}`} className="cursor-pointer mt-2 text-lg text-primary">See More...</Link>
         </div>
       </div>
     </div>

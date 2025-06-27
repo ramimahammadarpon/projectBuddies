@@ -69,7 +69,7 @@ const Table = ({ myTasks, setMyTasks, myTask, index }) => {
         </div>
       </td>
       <td>{myTask.deadline}</td>
-      <td>{myTask.budget} Taka</td>
+      <td>${myTask.budget}</td>
       <th>
         <Link
           to={`/myPostedTasks/update/${myTask._id}`}
