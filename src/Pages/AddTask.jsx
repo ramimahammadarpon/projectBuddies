@@ -15,7 +15,9 @@ const AddTask = () => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const newTask = Object.fromEntries(formData.entries());
+    const {budget, ...rest} = Object.fromEntries(formData.entries());
+    console.log(budget, rest);
+    const newTask = {...rest,budget:parseInt(budget)};
     console.log(newTask);
 
     fetch("https://b11-a10-server-side.vercel.app/tasks", {

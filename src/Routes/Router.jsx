@@ -47,13 +47,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "browseTasks",
-        element: (<BrowseTasks></BrowseTasks>),
-        loader: () => fetch("https://b11-a10-server-side.vercel.app/tasks"),
-        hydrateFallbackElement: (
-          <div className="min-h-[70vh] flex justify-center items-center">
-            <span className="loading loading-spinner w-12"></span>
-          </div>
-        ),
+        element: (<BrowseTasks></BrowseTasks>)
       },
       {
         path: "taskDetails/:id",
