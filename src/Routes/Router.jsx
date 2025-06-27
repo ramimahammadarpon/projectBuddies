@@ -11,6 +11,9 @@ import MyPostedTask from "../Pages/MyPostedTask";
 import UpdateTask from "../Pages/UpdateTask";
 import Bids from "../Pages/Bids";
 import ErrorPage from "../Pages/ErrorPage";
+import Terms from "../Pages/Terms";
+import Privacy from "../Pages/Privacy";
+import DeveloperResources from "../Pages/DeveloperRousources";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -103,6 +106,18 @@ export const router = createBrowserRouter([
           <div className="min-h-[70vh] flex justify-center items-center">
             <span className="loading loading-spinner w-12"></span>
           </div>)
+      },
+      {
+        path: 'termsAndServices',
+        Component: Terms
+      },
+      {
+        path: 'privacyAndPolicy',
+        Component: Privacy
+      },
+      {
+        path: 'developerResources',
+        Component: DeveloperResources
       }
     ],
   },

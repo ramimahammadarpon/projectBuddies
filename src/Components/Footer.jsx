@@ -13,21 +13,18 @@ const Footer = () => {
           <p className="font-light md:text-3xl text-2xl mb-3 text-white">
             Project<span className="font-bold text-secondary">Buddies</span>
           </p>
-          <Link className="text-secondary" to="/">
-            Apps
+          <Link className="text-secondary" to="/browseTasks">
+            Browse Tasks
           </Link>
-          <Link className="text-secondary" to="/profile">
-            My Profile
-          </Link>
-          <Link className="text-secondary" to="/faqs">
-            FAQs
+          <Link className="text-secondary" to="/addTask">
+            Add Task
           </Link>
         </div>
         <div className="text-secondary px-5 flex flex-col">
-          <a href="#">Terms and Services</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Developer Resources</a>
-          <a href="#">Terms and Services</a>
+          <p className="font-semibold text-xl">Informations</p>
+          <Link to="/termsAndServices">Terms and Services</Link>
+          <Link to="/privacyAndPolicy">Privacy and Policy</Link>
+          <Link to="/developerResources">Developer Resources</Link>
         </div>
         <div className="lg:flex justify-end items-end">
           <div className="">
